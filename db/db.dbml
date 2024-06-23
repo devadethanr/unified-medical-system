@@ -1,0 +1,177 @@
+Table users {
+  umsId string [primary key, note: 'Alpha-numeric']
+  name string
+  email string [unique]
+  googleAuthId string
+  phoneNumber string
+  address string
+  registeredAt timestamp
+  status string
+  createdAt timestamp [default: 'CURRENT_TIMESTAMP']
+  updatedAt timestamp [default: 'CURRENT_TIMESTAMP']
+  deletedAt timestamp [note: 'Soft delete timestamp']
+  passwordHash string [note: 'Hashed and salted password']
+}
+
+Table roles {
+  rolesId integer [primary key]
+  roleName string
+  createdAt timestamp [default: 'CURRENT_TIMESTAMP']
+  updatedAt timestamp [default: 'CURRENT_TIMESTAMP']
+}
+
+Table login {
+  umsId string [primary key, ref: > users.umsId, note: 'Alpha-numeric']
+  passwordHash string [note: 'Hashed and salted password']
+  email string [unique]
+  roleId integer [ref: > roles.rolesId]
+  status string
+  createdAt timestamp [default: 'CURRENT_TIMESTAMP']
+  updatedAt timestamp [default: 'CURRENT_TIMESTAMP']
+}
+
+Table patients {
+  umsId string [primary key, note: 'UMSG-UUIDv4', ref: > users.umsId]
+  dateOfBirth date
+  gender string
+  rolesId integer [ref: > roles.rolesId]
+  createdAt timestamp [default: 'CURRENT_TIMESTAMP']
+  updatedAt timestamp [default: 'CURRENT_TIMESTAMP']
+}
+
+Table patientDetails {
+  patientId integer [primary key, ref: > patients.umsId]
+  medicalHistory json
+  photo string [note: 'Path to patient photo']
+  status string
+  createdAt timestamp [default: 'CURRENT_TIMESTAMP']
+  updatedAt timestamp [default: 'CURRENT_TIMESTAMP']
+}
+
+Table doctors {
+  umsId string [primary key, note: 'UMSD-UUIDv4', ref: > users.umsId]
+  specialization string
+  rolesId integer [ref: > roles.rolesId]
+  createdAt timestamp [default: 'CURRENT_TIMESTAMP']
+  updatedAt timestamp [default: 'CURRENT_TIMESTAMP']
+}
+
+Table doctorDetails {
+  doctorId integer [primary key, ref: > doctors.umsId]
+  availability string
+  medicalId string [note: 'Alpha-numeric']
+  qualification json
+  photo string [note: 'Path to doctor photo']
+  status string
+  createdAt timestamp [default: 'CURRENT_TIMESTAMP']
+  updatedAt timestamp [default: 'CURRENT_TIMESTAMP']
+}
+
+Table hospitals {
+  umsId string [primary key, note: 'UMSH-UUIDv4', ref: > users.umsId]
+  hospitalName string
+  location string
+  rolesId integer [ref: > roles.rolesId]
+  createdAt timestamp [default: 'CURRENT_TIMESTAMP']
+  updatedAt timestamp [default: 'CURRENT_TIMESTAMP']
+}
+
+Table hospitalDetails {
+  hospitalId integer [primary key, ref: > hospitals.umsId]
+  hospitalType string
+  speciality json
+  affiliationNumber string [note: 'Alpha-numeric']
+  status string
+  createdAt timestamp [default: 'CURRENT_TIMESTAMP']
+  updatedAt timestamp [default: 'CURRENT_TIMESTAMP']
+}
+
+Table appointments {
+  appointmentId integer [primary key]
+  patientId integer [ref: > patients.umsId]
+  doctorId integer [ref: > doctors.umsId]
+  rolesId integer [ref: > roles.rolesId]
+  dateTime timestamp
+  appointmentNotes text
+  appointmentSpecialization string
+  appointmentStatus string
+  disabilityCertificateId string [note: 'Alpha-numeric']
+  status string
+  createdAt timestamp [default: 'CURRENT_TIMESTAMP']
+  updatedAt timestamp [default: 'CURRENT_TIMESTAMP']
+}
+
+Table medicalRecords {
+  recordId integer [primary key]
+  patientId integer [ref: > patients.umsId]
+  doctorId integer [ref: > doctors.umsId]
+  rolesId integer [ref: > roles.rolesId]
+  dateOfRecord date
+  documentType string
+  documentContent json
+  hospitalDb string
+  status string
+  createdAt timestamp [default: 'CURRENT_TIMESTAMP']
+  updatedAt timestamp [default: 'CURRENT_TIMESTAMP']
+}
+
+Table labResults {
+  labResultId integer [primary key]
+  patientId integer [ref: > patients.umsId]
+  rolesId integer [ref: > roles.rolesId]
+  testType string
+  resultDate date
+  resultDetails json
+  labTechnicianId integer
+  status string
+  createdAt timestamp [default: 'CURRENT_TIMESTAMP']
+  updatedAt timestamp [default: 'CURRENT_TIMESTAMP']
+}
+
+Table symptoms {
+  symptomId integer [primary key]
+  patientId integer [ref: > patients.umsId]
+  rolesId integer [ref: > roles.rolesId]
+  date date
+  reportedSymptoms string [increment]
+  status string
+  createdAt timestamp [default: 'CURRENT_TIMESTAMP']
+  updatedAt timestamp [default: 'CURRENT_TIMESTAMP']
+}
+
+Table diseaseOutbreaks {
+  outbreakId integer [primary key]
+  diseaseName string
+  location geojson
+  rolesId integer [ref: > roles.rolesId]
+  startDate date
+  latestUpdate date
+  caseCount integer
+  status string
+  createdAt timestamp [default: 'CURRENT_TIMESTAMP']
+  updatedAt timestamp [default: 'CURRENT_TIMESTAMP']
+}
+
+Table feedbacks {
+  feedbackId integer [primary key]
+  umsId integer [ref: > users.umsId]
+  rolesId integer [ref: > roles.rolesId]
+  subject string
+  description text
+  rating integer
+  status string
+  createdAt timestamp [default: 'CURRENT_TIMESTAMP']
+  updatedAt timestamp [default: 'CURRENT_TIMESTAMP']
+}
+
+Table complaints {
+  complaintId integer [primary key]
+  umsId integer [ref: > users.umsId]
+  rolesId integer [ref: > roles.rolesId]
+  subject string
+  description text
+  status string
+  resolution string
+  createdAt timestamp [default: 'CURRENT_TIMESTAMP']
+  updatedAt timestamp [default: 'CURRENT_TIMESTAMP']
+}
