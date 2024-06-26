@@ -1,5 +1,5 @@
 Table users {
-  umsId string [primary key, note: 'Alpha-numeric']
+  umsId string [primary key, note: 'Alpha-numeric, UUIDv4']
   name string
   email string [unique]
   googleAuthId string
