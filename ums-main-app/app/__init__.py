@@ -16,7 +16,7 @@ def create_app(config_class=Config):
     app.register_blueprint(hospital)
     app.register_blueprint(patient)
 
-    from . import routes
-    app.register_blueprint(routes.bp)
+    from .routes import bp
+    app.register_blueprint(bp)
 
     return app
