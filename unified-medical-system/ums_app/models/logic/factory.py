@@ -7,7 +7,7 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 # from models.schemas import users_schema, roles_schema, login_schema
 from cerberus import Validator
-from ..schemas.users import users_schema
+from ums_app.models.schemas import users_schema
 
 factory_bp = Blueprint('factory', __name__)
 #mongodb client and connection
@@ -15,8 +15,6 @@ load_dotenv()
 mongo_uri = os.getenv('MONGO_URI')
 client = MongoClient(mongo_uri)
 db = client['umsdb']
-
-# Define a simple schema for demonstration purposes
 
 @factory_bp.route('/create/user', methods=['POST'])
 def create_user():

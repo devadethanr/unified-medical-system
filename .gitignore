@@ -1,3 +1,5 @@
 TEMPLATE
 umsenv
 ums-venv
+umsvenv
+.env
