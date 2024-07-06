@@ -1,0 +1,1 @@
+hospitalDetails_schema = {}

@@ -1,0 +1,10 @@
+{
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "googleAuthId": "google123",
+    "phoneNumber": "1234567890",
+    "address": "123 Main St",
+    "pincode": 12345,
+    "status": "active",
+    "passwordHash": "hashed_password"
+}

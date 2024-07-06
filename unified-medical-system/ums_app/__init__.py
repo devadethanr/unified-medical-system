@@ -28,10 +28,12 @@ def create_app(config_name='default'):
     from .routes.hospital_bp import hospital_bp
     from .routes.doctor_bp import doctor_bp
     from .routes.patient_bp import patient_bp
+    from .models.logic.factory import factory_bp
     #registering blueprints
     app.register_blueprint(auth_bp)
     app.register_blueprint(admin_bp)
     app.register_blueprint(hospital_bp)
     app.register_blueprint(doctor_bp)
     app.register_blueprint(patient_bp)
+    app.register_blueprint(factory_bp)
     return app
