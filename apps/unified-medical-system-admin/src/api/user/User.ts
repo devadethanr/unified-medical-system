@@ -1,0 +1,30 @@
+import { JsonValue } from "type-fest";
+
+export type User = {
+  address: string | null;
+  createdAt: Date;
+  deletedAt: Date | null;
+  email: string | null;
+  firstName: string | null;
+  googleAuthId: string | null;
+  id: string;
+  lastName: string | null;
+  name: string | null;
+  passwordHash: string | null;
+  phoneNumber: string | null;
+  registeredAt: Date | null;
+  roles: JsonValue;
+  status: string | null;
+  umsId: string | null;
+  updatedAt: Date;
+  username: string;
+  usrAddress: string | null;
+  usrDeletedAt: Date | null;
+  usrGoogleAuthId: string | null;
+  usrName: string | null;
+  usrPasswordHash: string | null;
+  usrPhoneNumber: string | null;
+  usrRegisteredAt: Date | null;
+  usrStatus: string | null;
+  usrUmsId: string | null;
+};
