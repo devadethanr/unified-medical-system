@@ -1,0 +1,31 @@
+import { SortOrder } from "../../util/SortOrder";
+
+export type UserOrderByInput = {
+  address?: SortOrder;
+  createdAt?: SortOrder;
+  deletedAt?: SortOrder;
+  email?: SortOrder;
+  firstName?: SortOrder;
+  googleAuthId?: SortOrder;
+  id?: SortOrder;
+  lastName?: SortOrder;
+  name?: SortOrder;
+  password?: SortOrder;
+  passwordHash?: SortOrder;
+  phoneNumber?: SortOrder;
+  registeredAt?: SortOrder;
+  roles?: SortOrder;
+  status?: SortOrder;
+  umsId?: SortOrder;
+  updatedAt?: SortOrder;
+  username?: SortOrder;
+  usrAddress?: SortOrder;
+  usrDeletedAt?: SortOrder;
+  usrGoogleAuthId?: SortOrder;
+  usrName?: SortOrder;
+  usrPasswordHash?: SortOrder;
+  usrPhoneNumber?: SortOrder;
+  usrRegisteredAt?: SortOrder;
+  usrStatus?: SortOrder;
+  usrUmsId?: SortOrder;
+};

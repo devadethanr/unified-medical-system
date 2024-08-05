@@ -1,0 +1,209 @@
+datasource db {
+  provider = "mongodb"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Login {
+  createdAt       DateTime @default(now())
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  lgnEmail        String?
+  lgnPasswordHash String?
+  lgnRoleId       Int?
+  lgnStatus       String?
+  lgnUmsId        String?
+  updatedAt       DateTime @updatedAt
+}
+
+model Roles {
+  createdAt   DateTime @default(now())
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  rleRoleName String?
+  roleName    String?
+  updatedAt   DateTime @updatedAt
+}
+
+model DiseaseOutbreaks {
+  createdAt       DateTime  @default(now())
+  dobCaseCount    Int?
+  dobDiseaseName  String?
+  dobLatestUpdate DateTime?
+  dobLocation     Json?
+  dobRolesId      Int?
+  dobStartDate    DateTime?
+  dobStatus       String?
+  id              String    @id @default(auto()) @map("_id") @db.ObjectId
+  updatedAt       DateTime  @updatedAt
+}
+
+model LabResults {
+  createdAt          DateTime  @default(now())
+  id                 String    @id @default(auto()) @map("_id") @db.ObjectId
+  lbrLabTechnicianId Int?
+  lbrPatientId       String?
+  lbrResultDate      DateTime?
+  lbrResultDetails   Json?
+  lbrRolesId         Int?
+  lbrStatus          String?
+  lbrTestType        String?
+  updatedAt          DateTime  @updatedAt
+}
+
+model PatientDetails {
+  createdAt        DateTime @default(now())
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  pdMedicalHistory Json?
+  pdPatientId      String?
+  pdPhoto          String?
+  pdStatus         String?
+  updatedAt        DateTime @updatedAt
+}
+
+model Patients {
+  createdAt     DateTime  @default(now())
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  ptDateOfBirth DateTime?
+  ptGender      String?
+  ptRolesId     Int?
+  ptUmsId       String?
+  updatedAt     DateTime  @updatedAt
+}
+
+model Symptoms {
+  createdAt           DateTime  @default(now())
+  id                  String    @id @default(auto()) @map("_id") @db.ObjectId
+  symDate             DateTime?
+  symPatientId        String?
+  symReportedSymptoms String?
+  symRolesId          Int?
+  symStatus           String?
+  updatedAt           DateTime  @updatedAt
+}
+
+model Complaints {
+  cpDescription String?
+  cpResolution  String?
+  cpRolesId     Int?
+  cpStatus      String?
+  cpSubject     String?
+  cpUmsId       String?
+  createdAt     DateTime @default(now())
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  updatedAt     DateTime @updatedAt
+}
+
+model Doctors {
+  createdAt        DateTime @default(now())
+  drRolesId        Int?
+  drSpecialization String?
+  drUmsId          String?
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  updatedAt        DateTime @updatedAt
+}
+
+model Hospitals {
+  createdAt         DateTime @default(now())
+  hsptlHospitalName String?
+  hsptlLocation     String?
+  hsptlRolesId      Int?
+  hsptlUmsId        String?
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  updatedAt         DateTime @updatedAt
+}
+
+model DoctorDetails {
+  createdAt       DateTime @default(now())
+  ddAvailability  String?
+  ddDoctorId      String?
+  ddMedicalId     String?
+  ddPhoto         String?
+  ddQualification Json?
+  ddStatus        String?
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  updatedAt       DateTime @updatedAt
+}
+
+model Appointments {
+  apAppointmentNotes          String?
+  apAppointmentSpecialization String?
+  apAppointmentStatus         String?
+  apDateTime                  DateTime?
+  apDisabilityCertificateId   String?
+  apDoctorId                  String?
+  apPatientId                 String?
+  apRolesId                   Int?
+  apStatus                    String?
+  createdAt                   DateTime  @default(now())
+  id                          String    @id @default(auto()) @map("_id") @db.ObjectId
+  updatedAt                   DateTime  @updatedAt
+}
+
+model Feedbacks {
+  createdAt     DateTime @default(now())
+  fbDescription String?
+  fbRating      Int?
+  fbRolesId     Int?
+  fbStatus      String?
+  fbSubject     String?
+  fbUmsId       String?
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  updatedAt     DateTime @updatedAt
+}
+
+model MedicalRecords {
+  createdAt         DateTime  @default(now())
+  id                String    @id @default(auto()) @map("_id") @db.ObjectId
+  mrDateOfRecord    DateTime?
+  mrDoctorId        String?
+  mrDocumentContent Json?
+  mrDocumentType    String?
+  mrHospitalDb      String?
+  mrPatientId       String?
+  mrRolesId         Int?
+  mrStatus          String?
+  updatedAt         DateTime  @updatedAt
+}
+
+model HospitalDetails {
+  createdAt           DateTime @default(now())
+  hdAffiliationNumber String?
+  hdHospitalId        String?
+  hdHospitalType      String?
+  hdSpeciality        Json?
+  hdStatus            String?
+  id                  String   @id @default(auto()) @map("_id") @db.ObjectId
+  updatedAt           DateTime @updatedAt
+}
+
+model User {
+  address         String?
+  createdAt       DateTime  @default(now())
+  deletedAt       DateTime?
+  email           String?   @unique
+  firstName       String?
+  googleAuthId    String?
+  id              String    @id @default(auto()) @map("_id") @db.ObjectId
+  lastName        String?
+  name            String?
+  password        String
+  passwordHash    String?
+  phoneNumber     String?
+  registeredAt    DateTime?
+  roles           Json
+  status          String?
+  umsId           String?
+  updatedAt       DateTime  @updatedAt
+  username        String    @unique
+  usrAddress      String?
+  usrDeletedAt    DateTime?
+  usrGoogleAuthId String?
+  usrName         String?
+  usrPasswordHash String?
+  usrPhoneNumber  String?
+  usrRegisteredAt DateTime?
+  usrStatus       String?
+  usrUmsId        String?
+}
